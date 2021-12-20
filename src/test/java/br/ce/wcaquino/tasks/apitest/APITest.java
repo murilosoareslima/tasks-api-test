@@ -11,7 +11,7 @@ public class APITest {
 
 	@BeforeClass
 	public static void setup() {
-		RestAssured.baseURI = "http://localhost:8001";
+		RestAssured.baseURI = "http://localhost:8001/tasks-backend";
 	}
 
 	@Test
@@ -41,7 +41,7 @@ public class APITest {
 	@Test
 	public void naoDeveAdicionarTarefaInvalida() {
 		RestAssured.given()
-			.body("{\"task\" : \"Teste via API\",\"dueDate\" : \"2010-12-14\" }")
+			.body("{\"task\" : \"Teste via API\",\"dueDate\" : \"2010-12-20\" }")
 			.contentType(ContentType.JSON)
 		.when()
 			.post("/todo")
