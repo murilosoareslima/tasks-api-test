@@ -22,7 +22,7 @@ public class APITest {
 
 	@Test
 	public void deveLogarTudoDaRequsicao() {
-		RestAssured.given().log().all()// logar a requisição
+		RestAssured.given().log().all()// logar a requisiï¿½ï¿½o
 				.when().get("/todo")// quando der um get nessa rota
 				.then().log().all();// entao, logar tudo sobre a resposta
 	}
@@ -49,5 +49,25 @@ public class APITest {
 			.log().all()
 			.statusCode(400)
 			.body("message", CoreMatchers.is("Due date must not be in past"));
+	}
+
+	@Test
+	public void deveRemoverTarefaComSucesso() {
+		//inserindo e devolvendo o id gerado.
+		Integer id = RestAssured.given()
+			.body("{\"task\" : \"Teste via API\",\"dueDate\" : \"2022-12-20\" }")
+			.contentType(ContentType.JSON)
+		.when()
+			.post("/todo")
+		.then()				
+			.statusCode(201);
+			.extract().path("id");
+
+		//remover
+		RestAssured.given()
+		.when()
+			.delete("/todo/"+id)
+		.then()
+			.statusCode(204);
 	}
 }
