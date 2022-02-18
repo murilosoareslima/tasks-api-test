@@ -53,15 +53,16 @@ public class APITest {
 
 	@Test
 	public void deveRemoverTarefaComSucesso() {
-		//inserindo e devolvendo o id gerado.
+		// inserindo e devolvendo o id gerado.
 		Integer id = RestAssured.given()
-			.body("{\"task\" : \"Teste via API\",\"dueDate\" : \"2022-12-20\" }")
-			.contentType(ContentType.JSON)
-		.when()
-			.post("/todo")
-		.then()				
-			.statusCode(201);
-			.extract().path("id");
+					.body("{\"task\" : \"Teste via API\",\"dueDate\" : \"2022-12-20\" }")
+					.contentType(ContentType.JSON)
+				.when()
+					.post("/todo")
+				.then()
+					.statusCode(201)
+					.extract()
+					.path("id");
 
 		//remover
 		RestAssured.given()
